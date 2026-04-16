@@ -33,7 +33,10 @@ export const ui = {
     'footer.phone': 'Telefon',
     'footer.email': 'Email',
     'footer.followUs': 'Sledujte nás',
-    'footer.copyright': '© 2026 Všechna práva vyhrazena',
+    'footer.copyright': '© 2026 Všechna práva nevyrazena',
+    'contact.visitUs': 'Navštivte nás',
+    'contact.hours': 'Otevírací doba',
+    'contact.hours.value': 'Po – Pá: 10:00 – 19:00, So: 11:00 – 17:00, Ne: Zavřeno',
   },
   en: {
     'nav.home': 'Home',
@@ -62,6 +65,9 @@ export const ui = {
     'footer.email': 'Email',
     'footer.followUs': 'Follow Us',
     'footer.copyright': '© 2026 All rights reserved',
+    'contact.visitUs': 'Visit Us',
+    'contact.hours': 'Open Hours',
+    'contact.hours.value': 'Mon – Fri: 10:00 AM – 7:00 PM, Sat: 11:00 AM – 5:00 PM, Sun: Closed',
   },
   de: {
     'nav.home': 'Startseite',
@@ -90,5 +96,8 @@ export const ui = {
     'footer.email': 'Email',
     'footer.followUs': 'Folge uns',
     'footer.copyright': '© 2026 Alle Rechte vorbehalten',
+    'contact.visitUs': 'Besuchen Sie uns',
+    'contact.hours': 'Öffnungszeiten',
+    'contact.hours.value': 'Mo – Fr: 10:00 – 19:00, Sa: 11:00 – 17:00, So: Geschlossen',
   },
 } as const;
