@@ -4,13 +4,14 @@ import '../styles/global.css';
 interface Props {
 	title: string;
 	description?: string;
+	lang?: string;
 }
 
-const { title, description = "Art Gallery - A premium exhibition of digital arts" } = Astro.props;
+const { title, description = "Art Gallery - A premium exhibition of digital arts", lang = "cs" } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="cs" class="bg-[#0a0a0a] text-white selection:bg-gold-500/30">
+<html lang={lang} class="bg-[#0a0a0a] text-white selection:bg-gold-500/30">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
