@@ -1,0 +1,218 @@
+[
+  {
+    "id": "abs-001",
+    "genre": "abstract",
+    "title": {
+      "cs": "Epocha ticha",
+      "en": "Epoch of Silence",
+      "de": "Epoche der Stille"
+    },
+    "dimensions": "120 x 100 cm",
+    "year": 2024,
+    "status": "available",
+    "mainImage": "/artworks/abs-001-1.jpg",
+    "images": [
+      "/artworks/abs-001-1.jpg",
+      "/artworks/abs-001-2.jpg",
+      "/artworks/abs-001-3.jpg"
+    ]
+  },
+  {
+    "id": "abs-002",
+    "genre": "abstract",
+    "title": {
+      "cs": "Fragmenty paměti",
+      "en": "Fragments of Memory",
+      "de": "Fragmente der Erinnerung"
+    },
+    "dimensions": "80 x 80 cm",
+    "year": 2023,
+    "status": "sold",
+    "mainImage": "/artworks/abs-002-1.jpg",
+    "images": [
+      "/artworks/abs-002-1.jpg",
+      "/artworks/abs-002-2.jpg",
+      "/artworks/abs-002-3.jpg"
+    ]
+  },
+  {
+    "id": "abs-003",
+    "genre": "abstract",
+    "title": {
+      "cs": "Tanec světla",
+      "en": "Dance of Light",
+      "de": "Tanz des Lichts"
+    },
+    "dimensions": "150 x 120 cm",
+    "year": 2024,
+    "status": "available",
+    "mainImage": "/artworks/abs-003-1.jpg",
+    "images": [
+      "/artworks/abs-003-1.jpg",
+      "/artworks/abs-003-2.jpg",
+      "/artworks/abs-003-3.jpg"
+    ]
+  },
+  {
+    "id": "min-001",
+    "genre": "minimal",
+    "title": {
+      "cs": "Horizontální klid",
+      "en": "Horizontal Calm",
+      "de": "Horizontale Ruhe"
+    },
+    "dimensions": "100 x 50 cm",
+    "year": 2024,
+    "status": "available",
+    "mainImage": "/artworks/min-001-1.jpg",
+    "images": [
+      "/artworks/min-001-1.jpg",
+      "/artworks/min-001-2.jpg",
+      "/artworks/min-001-3.jpg"
+    ]
+  },
+  {
+    "id": "min-002",
+    "genre": "minimal",
+    "title": {
+      "cs": "Bílý prostor",
+      "en": "White Space",
+      "de": "Weißer Raum"
+    },
+    "dimensions": "120 x 120 cm",
+    "year": 2023,
+    "status": "available",
+    "mainImage": "/artworks/min-002-1.jpg",
+    "images": [
+      "/artworks/min-002-1.jpg",
+      "/artworks/min-002-2.jpg",
+      "/artworks/min-002-3.jpg"
+    ]
+  },
+  {
+    "id": "min-003",
+    "genre": "minimal",
+    "title": {
+      "cs": "Bod nula",
+      "en": "Point Zero",
+      "de": "Punkt Null"
+    },
+    "dimensions": "60 x 60 cm",
+    "year": 2024,
+    "status": "reserved",
+    "mainImage": "/artworks/min-003-1.jpg",
+    "images": [
+      "/artworks/min-003-1.jpg",
+      "/artworks/min-003-2.jpg",
+      "/artworks/min-003-3.jpg"
+    ]
+  },
+  {
+    "id": "por-001",
+    "genre": "portraits",
+    "title": {
+      "cs": "Neznámý poutník",
+      "en": "Unknown Pilgrim",
+      "de": "Unbekannter Pilger"
+    },
+    "dimensions": "70 x 90 cm",
+    "year": 2024,
+    "status": "available",
+    "mainImage": "/artworks/por-001-1.jpg",
+    "images": [
+      "/artworks/por-001-1.jpg",
+      "/artworks/por-001-2.jpg",
+      "/artworks/por-001-3.jpg"
+    ]
+  },
+  {
+    "id": "por-002",
+    "genre": "portraits",
+    "title": {
+      "cs": "Stín minulosti",
+      "en": "Shadow of the Past",
+      "de": "Schatten der Vergangenheit"
+    },
+    "dimensions": "80 x 100 cm",
+    "year": 2023,
+    "status": "sold",
+    "mainImage": "/artworks/por-002-1.jpg",
+    "images": [
+      "/artworks/por-002-1.jpg",
+      "/artworks/por-002-2.jpg",
+      "/artworks/por-002-3.jpg"
+    ]
+  },
+  {
+    "id": "por-003",
+    "genre": "portraits",
+    "title": {
+      "cs": "Dívka v modrém",
+      "en": "Girl in Blue",
+      "de": "Mädchen in Blau"
+    },
+    "dimensions": "60 x 80 cm",
+    "year": 2024,
+    "status": "available",
+    "mainImage": "/artworks/por-003-1.jpg",
+    "images": [
+      "/artworks/por-003-1.jpg",
+      "/artworks/por-003-2.jpg",
+      "/artworks/por-003-3.jpg"
+    ]
+  },
+  {
+    "id": "dig-001",
+    "genre": "digital",
+    "title": {
+      "cs": "Kybernetický sen",
+      "en": "Cybernetic Dream",
+      "de": "Kybernetischer Traum"
+    },
+    "dimensions": "4K Digital",
+    "year": 2024,
+    "status": "available",
+    "mainImage": "/artworks/dig-001-1.jpg",
+    "images": [
+      "/artworks/dig-001-1.jpg",
+      "/artworks/dig-001-2.jpg",
+      "/artworks/dig-001-3.jpg"
+    ]
+  },
+  {
+    "id": "dig-002",
+    "genre": "digital",
+    "title": {
+      "cs": "Neonová řeka",
+      "en": "Neon River",
+      "de": "Neon Fluss"
+    },
+    "dimensions": "4K Digital",
+    "year": 2024,
+    "status": "available",
+    "mainImage": "/artworks/dig-002-1.jpg",
+    "images": [
+      "/artworks/dig-002-1.jpg",
+      "/artworks/dig-002-2.jpg",
+      "/artworks/dig-002-3.jpg"
+    ]
+  },
+  {
+    "id": "dig-003",
+    "genre": "digital",
+    "title": {
+      "cs": "Virtuální krajina I",
+      "en": "Virtual Landscape I",
+      "de": "Virtuelle Landschaft I"
+    },
+    "dimensions": "4K Digital",
+    "year": 2023,
+    "status": "reserved",
+    "mainImage": "/artworks/dig-003-1.jpg",
+    "images": [
+      "/artworks/dig-003-1.jpg",
+      "/artworks/dig-003-2.jpg",
+      "/artworks/dig-003-3.jpg"
+    ]
+  }
+]
