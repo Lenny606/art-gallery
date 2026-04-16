@@ -27,18 +27,21 @@ const t = useTranslations(lang);
 
 // Localized values
 const title = art.title[lang as keyof typeof art.title] || art.title.en;
+const technique = (art as any).technique[lang as keyof typeof art.title] || (art as any).technique.en;
 const genreLabel = t(`categories.${art.genre}` as any);
 
-const labelsMap = {
-    en: { dimensions: 'Dimensions', year: 'Year', status: 'Status', back: 'Back to Gallery', about: 'About the work' },
-    de: { dimensions: 'Maße', year: 'Jahr', status: 'Status', back: 'Zurück zur Galerie', about: 'Über das Werk' }
+const labels = {
+    technique: t('artwork.technique'),
+    dimensions: t('artwork.dimensions'),
+    year: t('artwork.year'),
+    status: t('artwork.status'),
+    back: lang === 'de' ? 'Zurück zur Galerie' : 'Back to Gallery',
+    about: lang === 'de' ? 'Über das Werk' : 'About the work'
 };
 
-const labels = labelsMap[lang as keyof typeof labelsMap] || labelsMap.en;
-
 const descriptions = {
-    en: `This piece represents a unique dialogue between form and content. ${title} is part of a deeper exploration of the ${genreLabel} medium. Every detail has been carefully considered to achieve maximum visual harmony.`,
-    de: `Dieses Stück stellt einen einzigartigen Dialog zwischen Form und Inhalt dar. ${title} ist Teil einer tieferen Auseinandersetzung mit dem Medium ${genreLabel}. Jedes Detail wurde sorgfältig durchdacht, um eine maximale visuelle Harmonie zu erreichen.`
+    en: `This piece represents a unique dialogue between form and content. ${title} is part of a deeper exploration of the ${genreLabel} medium using ${technique}. Every detail has been carefully considered to achieve maximum visual harmony.`,
+    de: `Dieses Stück stellt einen einzigartigen Dialog zwischen Form und Inhalt dar. ${title} ist Teil einer tieferen Auseinandersetzung mit dem Medium ${genreLabel} unter Verwendung von ${technique}. Jedes Detail wurde sorgfältig durchdacht, um eine maximale visuelle Harmonie zu erreichen.`
 };
 
 const description = descriptions[lang as keyof typeof descriptions] || descriptions.en;
@@ -54,6 +57,7 @@ const description = descriptions[lang as keyof typeof descriptions] || descripti
 
         <div class="max-w-7xl mx-auto px-6 md:px-8">
             <ArtworkInfo 
+                technique={technique}
                 dimensions={art.dimensions} 
                 year={art.year} 
                 status={art.status}

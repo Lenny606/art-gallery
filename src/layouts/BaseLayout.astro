@@ -41,6 +41,7 @@ const translatePath = useTranslatedPath(lang);
 				<div class="hidden md:flex gap-12 items-center mr-12">
 					<a href={translatePath('/')} class="text-xs uppercase tracking-widest font-bold opacity-30 hover:opacity-100 transition-opacity">{t('nav.home')}</a>
 					<a href={translatePath('/galerie')} class="text-xs uppercase tracking-widest font-bold opacity-30 hover:opacity-100 transition-opacity">{t('nav.gallery')}</a>
+					<a href={translatePath('/seznam-del')} class="text-xs uppercase tracking-widest font-bold opacity-30 hover:opacity-100 transition-opacity">{t('nav.list')}</a>
 					<a href={translatePath('/kontakt')} class="text-xs uppercase tracking-widest font-bold opacity-30 hover:opacity-100 transition-opacity">{t('nav.contact')}</a>
 				</div>
 				
@@ -84,6 +85,7 @@ const translatePath = useTranslatedPath(lang);
 					<nav class="flex flex-col gap-8">
 						<a href={translatePath('/')} class="mobile-link text-5xl font-black">{t('nav.home')}</a>
 						<a href={translatePath('/galerie')} class="mobile-link text-4xl font-black opacity-40 hover:opacity-100 transition-opacity">{t('nav.gallery')}</a>
+						<a href={translatePath('/seznam-del')} class="mobile-link text-4xl font-black opacity-40 hover:opacity-100 transition-opacity">{t('nav.list')}</a>
 						<a href={translatePath('/kontakt')} class="mobile-link text-4xl font-black opacity-40 hover:opacity-100 transition-opacity">{t('nav.contact')}</a>
 					</nav>
 

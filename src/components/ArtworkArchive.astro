@@ -1,0 +1,209 @@
+---
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
+import artworks from '../data/artworks.json';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+// Extract unique values for filters
+const genres = [...new Set(artworks.map(a => a.genre))];
+const statuses = [...new Set(artworks.map(a => a.status))];
+const types = [...new Set(artworks.map(a => a.type))];
+
+// Size categories helper
+const getSizeCategory = (dimensions: string) => {
+    if (dimensions.includes('Digital')) return 'digital';
+    const match = dimensions.match(/(\d+)/);
+    if (!match) return 'other';
+    const firstDim = parseInt(match[0]);
+    if (firstDim < 80) return 'small';
+    if (firstDim <= 120) return 'medium';
+    return 'large';
+};
+
+const processedArtworks = artworks.map(art => ({
+    ...art,
+    size: getSizeCategory(art.dimensions),
+    techLabel: (art as any).technique[lang as keyof typeof art.title] || (art as any).technique.en
+}));
+---
+
+<div class="archive-container flex flex-col gap-12">
+    <!-- Filters -->
+    <div class="filters-section bg-stone-50 p-6 md:p-10 rounded-2xl">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Genre Filter -->
+            <div>
+                <label class="block text-[10px] uppercase tracking-widest font-black mb-4 text-stone-400">{t('filter.genre')}</label>
+                <select id="filter-genre" class="w-full bg-white border border-stone-200 px-4 py-3 text-xs font-bold uppercase tracking-widest focus:outline-none focus:border-black transition-colors rounded-sm cursor-pointer">
+                    <option value="all">{t('filter.all')}</option>
+                    {genres.map(g => (
+                        <option value={g}>{t(`categories.${g}` as any)}</option>
+                    ))}
+                </select>
+            </div>
+
+            <!-- Status Filter -->
+            <div>
+                <label class="block text-[10px] uppercase tracking-widest font-black mb-4 text-stone-400">{t('filter.status')}</label>
+                <select id="filter-status" class="w-full bg-white border border-stone-200 px-4 py-3 text-xs font-bold uppercase tracking-widest focus:outline-none focus:border-black transition-colors rounded-sm cursor-pointer">
+                    <option value="all">{t('filter.all')}</option>
+                    {statuses.map(s => (
+                        <option value={s}>{t(`status.${s}` as any)}</option>
+                    ))}
+                </select>
+            </div>
+
+            <!-- Type Filter -->
+            <div>
+                <label class="block text-[10px] uppercase tracking-widest font-black mb-4 text-stone-400">{t('filter.type')}</label>
+                <select id="filter-type" class="w-full bg-white border border-stone-200 px-4 py-3 text-xs font-bold uppercase tracking-widest focus:outline-none focus:border-black transition-colors rounded-sm cursor-pointer">
+                    <option value="all">{t('filter.all')}</option>
+                    {types.map(type => (
+                        <option value={type}>{type.charAt(0).toUpperCase() + type.slice(1)}</option>
+                    ))}
+                </select>
+            </div>
+
+            <!-- Size Filter -->
+            <div>
+                <label class="block text-[10px] uppercase tracking-widest font-black mb-4 text-stone-400">{t('filter.size')}</label>
+                <select id="filter-size" class="w-full bg-white border border-stone-200 px-4 py-3 text-xs font-bold uppercase tracking-widest focus:outline-none focus:border-black transition-colors rounded-sm cursor-pointer">
+                    <option value="all">{t('filter.all')}</option>
+                    <option value="small">Small (&lt; 80cm)</option>
+                    <option value="medium">Medium (80-120cm)</option>
+                    <option value="large">Large (&gt; 120cm)</option>
+                    <option value="digital">Digital</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Reset Button -->
+        <div class="mt-8 pt-8 border-t border-stone-200 flex justify-end">
+            <button id="filter-reset" class="text-[10px] font-black uppercase tracking-[0.2em] text-stone-400 hover:text-black transition-colors flex items-center gap-3 group">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="group-hover:rotate-180 transition-transform duration-500">
+                    <path d="M23 4V10H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M20.49 15C19.19 18.01 16.03 20 12.5 20C7.81 20 4 16.19 4 11.5C4 6.81 7.81 3 12.5 3C16.17 3 19.33 5.34 20.49 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                {t('filter.reset')}
+            </button>
+        </div>
+    </div>
+
+    <!-- Results Grid -->
+    <div id="archive-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 opacity-1 transition-opacity duration-500">
+        {processedArtworks.map((art) => (
+            <a 
+                href={translatePath(`/obraz/${art.id}`)}
+                class="archive-item group flex flex-col cursor-pointer" 
+                data-genre={art.genre}
+                data-status={art.status}
+                data-type={art.type}
+                data-size={art.size}
+            >
+                <div class="aspect-[4/5] bg-stone-100 overflow-hidden mb-6 relative border border-stone-100">
+                    <img 
+                        src={art.mainImage} 
+                        alt={art.title[lang as keyof typeof art.title]} 
+                        class="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                    />
+                    <!-- Overlay Badge -->
+                    <div class="absolute top-4 left-4">
+                        <span class={`px-3 py-1 text-[8px] font-black uppercase tracking-widest rounded-full ${art.status === 'available' ? 'bg-emerald-500 text-white' : 'bg-stone-300 text-stone-600'}`}>
+                            {t(`status.${art.status}` as any)}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-start">
+                    <div class="space-y-1">
+                        <h3 class="font-black text-xl uppercase tracking-tighter group-hover:translate-x-1 transition-transform duration-500">
+                            {art.title[lang as keyof typeof art.title]}
+                        </h3>
+                        <p class="text-[10px] uppercase tracking-widest text-stone-400 font-bold">{art.techLabel}</p>
+                    </div>
+                    <p class="text-[10px] font-bold opacity-30">{art.year}</p>
+                </div>
+                
+                <div class="mt-4 pt-4 border-t border-stone-100 flex justify-between items-center text-[9px] uppercase tracking-widest font-black text-stone-400">
+                    <span>{t(`categories.${art.genre}` as any)}</span>
+                    <span>{art.dimensions}</span>
+                </div>
+            </a>
+        ))}
+    </div>
+
+    <!-- Empty State -->
+    <div id="archive-empty" class="hidden py-32 text-center">
+        <p class="text-2xl font-black text-stone-300 italic">{t('archive.empty')}</p>
+    </div>
+</div>
+
+<script>
+    const grid = document.getElementById('archive-grid');
+    const items = document.querySelectorAll('.archive-item');
+    const emptyState = document.getElementById('archive-empty');
+    
+    // Selects
+    const genreFilter = document.getElementById('filter-genre') as HTMLSelectElement;
+    const statusFilter = document.getElementById('filter-status') as HTMLSelectElement;
+    const typeFilter = document.getElementById('filter-type') as HTMLSelectElement;
+    const sizeFilter = document.getElementById('filter-size') as HTMLSelectElement;
+    const resetBtn = document.getElementById('filter-reset');
+
+    function applyFilters() {
+        if (!grid) return;
+
+        const genre = genreFilter.value;
+        const status = statusFilter.value;
+        const type = typeFilter.value;
+        const size = sizeFilter.value;
+
+        let visibleCount = 0;
+
+        // Start animation
+        grid.style.opacity = '0.3';
+
+        setTimeout(() => {
+            items.forEach((item: any) => {
+                const itemGenre = item.dataset.genre;
+                const itemStatus = item.dataset.status;
+                const itemType = item.dataset.type;
+                const itemSize = item.dataset.size;
+
+                const matchGenre = genre === 'all' || itemGenre === genre;
+                const matchStatus = status === 'all' || itemStatus === status;
+                const matchType = type === 'all' || itemType === type;
+                const matchSize = size === 'all' || itemSize === size;
+
+                if (matchGenre && matchStatus && matchType && matchSize) {
+                    item.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            // Handle empty state
+            if (emptyState) {
+                emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+            }
+
+            // End animation
+            grid.style.opacity = '1';
+        }, 150);
+    }
+
+    [genreFilter, statusFilter, typeFilter, sizeFilter].forEach(filter => {
+        filter?.addEventListener('change', applyFilters);
+    });
+
+    resetBtn?.addEventListener('click', () => {
+        genreFilter.value = 'all';
+        statusFilter.value = 'all';
+        typeFilter.value = 'all';
+        sizeFilter.value = 'all';
+        applyFilters();
+    });
+</script>

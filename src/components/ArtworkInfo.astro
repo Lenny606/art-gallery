@@ -3,14 +3,16 @@ interface Props {
   dimensions: string;
   year: number;
   status: string;
+  technique: string;
   labels: {
     dimensions: string;
     year: string;
     status: string;
+    technique: string;
   }
 }
 
-const { dimensions, year, status, labels } = Astro.props;
+const { dimensions, year, status, technique, labels } = Astro.props;
 
 const statusColors = {
     available: 'bg-emerald-500',
@@ -22,7 +24,11 @@ const statusKey = status as keyof typeof statusColors;
 ---
 
 <div class="artwork-info py-12 border-y border-stone-100 mt-12">
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-8 text-center md:text-left">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
+        <div class="info-item">
+            <span class="block text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-2">{labels.technique}</span>
+            <p class="text-xl font-medium">{technique}</p>
+        </div>
         <div class="info-item">
             <span class="block text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-2">{labels.dimensions}</span>
             <p class="text-xl font-medium">{dimensions}</p>
@@ -33,9 +39,9 @@ const statusKey = status as keyof typeof statusColors;
         </div>
         <div class="info-item">
             <span class="block text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-2">{labels.status}</span>
-            <div class="flex items-center gap-2 mt-1">
+            <div class="flex items-center justify-center md:justify-start gap-2 mt-1">
                 <span class={`w-2 h-2 rounded-full ${statusColors[statusKey] || 'bg-stone-200'}`}></span>
-                <p class="text-xl font-medium uppercase tracking-tight text-sm">{status}</p>
+                <p class="font-medium uppercase tracking-tight text-sm">{status}</p>
             </div>
         </div>
     </div>

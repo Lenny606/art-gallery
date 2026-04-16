@@ -2,6 +2,12 @@
   {
     "id": "abs-001",
     "genre": "abstract",
+    "type": "painting",
+    "technique": {
+      "cs": "Olej na plátně",
+      "en": "Oil on canvas",
+      "de": "Öl auf Leinwand"
+    },
     "title": {
       "cs": "Epocha ticha",
       "en": "Epoch of Silence",
@@ -20,6 +26,12 @@
   {
     "id": "abs-002",
     "genre": "abstract",
+    "type": "painting",
+    "technique": {
+      "cs": "Akryl na plátně",
+      "en": "Acrylic on canvas",
+      "de": "Acryl auf Leinwand"
+    },
     "title": {
       "cs": "Fragmenty paměti",
       "en": "Fragments of Memory",
@@ -38,6 +50,12 @@
   {
     "id": "abs-003",
     "genre": "abstract",
+    "type": "painting",
+    "technique": {
+      "cs": "Kombinovaná technika",
+      "en": "Mixed media",
+      "de": "Mischtechnik"
+    },
     "title": {
       "cs": "Tanec světla",
       "en": "Dance of Light",
@@ -56,6 +74,12 @@
   {
     "id": "min-001",
     "genre": "minimal",
+    "type": "graphic",
+    "technique": {
+      "cs": "Serigrafie",
+      "en": "Serigraphy",
+      "de": "Serigrafie"
+    },
     "title": {
       "cs": "Horizontální klid",
       "en": "Horizontal Calm",
@@ -74,6 +98,12 @@
   {
     "id": "min-002",
     "genre": "minimal",
+    "type": "painting",
+    "technique": {
+      "cs": "Olej na dřevě",
+      "en": "Oil on wood",
+      "de": "Öl auf Holz"
+    },
     "title": {
       "cs": "Bílý prostor",
       "en": "White Space",
@@ -92,6 +122,12 @@
   {
     "id": "min-003",
     "genre": "minimal",
+    "type": "graphic",
+    "technique": {
+      "cs": "Litografie",
+      "en": "Lithography",
+      "de": "Lithografie"
+    },
     "title": {
       "cs": "Bod nula",
       "en": "Point Zero",
@@ -99,7 +135,7 @@
     },
     "dimensions": "60 x 60 cm",
     "year": 2024,
-    "status": "reserved",
+    "status": "available",
     "mainImage": "/artworks/placeholder-3.jpg",
     "images": [
       "/artworks/placeholder-3.jpg",
@@ -110,6 +146,12 @@
   {
     "id": "por-001",
     "genre": "portraits",
+    "type": "sculpture",
+    "technique": {
+      "cs": "Bronz",
+      "en": "Bronze",
+      "de": "Bronze"
+    },
     "title": {
       "cs": "Neznámý poutník",
       "en": "Unknown Pilgrim",
@@ -128,6 +170,12 @@
   {
     "id": "por-002",
     "genre": "portraits",
+    "type": "painting",
+    "technique": {
+      "cs": "Uhel na papíře",
+      "en": "Charcoal on paper",
+      "de": "Kohle auf Papier"
+    },
     "title": {
       "cs": "Stín minulosti",
       "en": "Shadow of the Past",
@@ -146,6 +194,12 @@
   {
     "id": "por-003",
     "genre": "portraits",
+    "type": "painting",
+    "technique": {
+      "cs": "Pastel",
+      "en": "Pastel",
+      "de": "Pastell"
+    },
     "title": {
       "cs": "Dívka v modrém",
       "en": "Girl in Blue",
@@ -164,6 +218,12 @@
   {
     "id": "dig-001",
     "genre": "digital",
+    "type": "digital",
+    "technique": {
+      "cs": "Digitální malba",
+      "en": "Digital Painting",
+      "de": "Digitale Malerei"
+    },
     "title": {
       "cs": "Kybernetický sen",
       "en": "Cybernetic Dream",
@@ -182,6 +242,12 @@
   {
     "id": "dig-002",
     "genre": "digital",
+    "type": "digital",
+    "technique": {
+      "cs": "Generativní umění",
+      "en": "Generative Art",
+      "de": "Generative Kunst"
+    },
     "title": {
       "cs": "Neonová řeka",
       "en": "Neon River",
@@ -200,6 +266,12 @@
   {
     "id": "dig-003",
     "genre": "digital",
+    "type": "digital",
+    "technique": {
+      "cs": "3D Render",
+      "en": "3D Render",
+      "de": "3D Render"
+    },
     "title": {
       "cs": "Virtuální krajina I",
       "en": "Virtual Landscape I",
@@ -207,7 +279,7 @@
     },
     "dimensions": "4K Digital",
     "year": 2023,
-    "status": "reserved",
+    "status": "sold",
     "mainImage": "/artworks/placeholder-2.jpg",
     "images": [
       "/artworks/placeholder-2.jpg",

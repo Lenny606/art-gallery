@@ -24,12 +24,14 @@ const t = useTranslations(lang);
 
 // Localized values
 const title = art.title[lang as keyof typeof art.title] || art.title.cs || art.title.en;
+const technique = (art as any).technique[lang as keyof typeof art.title] || (art as any).technique.cs;
 const genreLabel = t(`categories.${art.genre}` as any);
 
 const labels = {
-    dimensions: 'Rozměry',
-    year: 'Rok',
-    status: 'Stav'
+    technique: t('artwork.technique'),
+    dimensions: t('artwork.dimensions'),
+    year: t('artwork.year'),
+    status: t('artwork.status')
 };
 ---
 
@@ -43,6 +45,7 @@ const labels = {
 
         <div class="max-w-7xl mx-auto px-6 md:px-8">
             <ArtworkInfo 
+                technique={technique}
                 dimensions={art.dimensions} 
                 year={art.year} 
                 status={art.status}
