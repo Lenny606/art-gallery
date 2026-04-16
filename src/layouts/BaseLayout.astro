@@ -38,15 +38,15 @@ const translatePath = useTranslatedPath(lang);
 					<a href={translatePath('/kontakt')} class="text-xs uppercase tracking-widest font-bold opacity-50 hover:opacity-100 transition-opacity">{t('nav.contact')}</a>
 				</div>
 
-				<!-- Logo / Brand for Mobile (Optional, let's keep it centered or left) -->
-				<div class="md:hidden">
+				<!-- Logo / Brand for Mobile -->
+				<div>
 					<a href={translatePath('/')} class="text-sm uppercase tracking-widest font-black">Art Gallery.</a>
 				</div>
 				
-				<!-- Language Switcher & Hamburger -->
+				<!-- Right Side: Desktop Lang Switcher & Mobile Hamburger -->
 				<div class="flex gap-6 items-center ml-auto">
-					<!-- Language Switcher (Desktop and Mobile) -->
-					<div class="flex gap-3">
+					<!-- Desktop Language Switcher (Hidden on mobile) -->
+					<div class="hidden md:flex gap-3">
 						{['cs', 'en', 'de'].map((l) => (
 							<a 
 								href={l === 'cs' ? '/' : `/${l}/`} 
@@ -58,23 +58,52 @@ const translatePath = useTranslatedPath(lang);
 					</div>
 
 					<!-- Hamburger Button -->
-					<button id="menu-toggle" class="md:hidden p-2 -mr-2 focus:outline-none" aria-label="Toggle Menu">
+					<button id="menu-toggle" class="md:hidden p-2 -mr-2 focus:outline-none" aria-label="Open Menu">
 						<div class="w-6 h-4 relative flex flex-col justify-between">
-							<span class="w-full h-[1.5px] bg-[#1a1a1a] transition-all duration-300 origin-left"></span>
-							<span class="w-full h-[1.5px] bg-[#1a1a1a] transition-all duration-300"></span>
-							<span class="w-full h-[1.5px] bg-[#1a1a1a] transition-all duration-300 origin-left"></span>
+							<span class="w-full h-[1.5px] bg-[#1a1a1a]"></span>
+							<span class="w-full h-[1.5px] bg-[#1a1a1a]"></span>
+							<span class="w-full h-[1.5px] bg-[#1a1a1a]"></span>
 						</div>
 					</button>
 				</div>
 			</nav>
 
 			<!-- Mobile Menu Overlay -->
-			<div id="mobile-menu" class="fixed inset-0 bg-[#fafafa] z-[90] flex flex-col items-center justify-center translate-x-full transition-transform duration-500 md:hidden">
-				<nav class="flex flex-col gap-12 text-center">
-					<a href={translatePath('/')} class="mobile-link text-4xl font-black">{t('nav.home')}</a>
-					<a href={translatePath('/galerie')} class="mobile-link text-4xl font-black">{t('nav.gallery')}</a>
-					<a href={translatePath('/kontakt')} class="mobile-link text-4xl font-black">{t('nav.contact')}</a>
-				</nav>
+			<div id="mobile-menu" class="fixed inset-0 bg-[#fafafa] z-[110] flex flex-col p-8 translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.85,0,0.15,1)] md:hidden overflow-y-auto">
+				<!-- Mobile Menu Header (Close Button) -->
+				<div class="flex justify-end mb-12 shrink-0">
+					<button id="menu-close" class="p-2 -mr-2 text-xs uppercase tracking-widest font-bold focus:outline-none" aria-label="Close Menu">
+						Zavřít [×]
+					</button>
+				</div>
+
+				<!-- Mobile Content wrapper -->
+				<div class="flex flex-col gap-16">
+					<!-- Mobile Nav Links -->
+					<nav class="flex flex-col gap-8">
+						<a href={translatePath('/')} class="mobile-link text-5xl font-black">{t('nav.home')}</a>
+						<a href={translatePath('/galerie')} class="mobile-link text-4xl font-black opacity-40 hover:opacity-100 transition-opacity">{t('nav.gallery')}</a>
+						<a href={translatePath('/kontakt')} class="mobile-link text-4xl font-black opacity-40 hover:opacity-100 transition-opacity">{t('nav.contact')}</a>
+					</nav>
+
+					<!-- Mobile Language Switcher (Moved here for better visibility) -->
+					<div class="pt-8 border-t border-black/5">
+						<p class="text-[10px] uppercase tracking-widest font-bold opacity-30 mb-6 font-bold">Jazyk / Language</p>
+						<div class="flex gap-8">
+							{['cs', 'en', 'de'].map((l) => (
+								<a 
+									href={l === 'cs' ? '/' : `/${l}/`} 
+									class={`text-2xl uppercase tracking-tight ${lang === l ? 'font-black underline underline-offset-8' : 'opacity-40 hover:opacity-100 transition-opacity'}`}
+								>
+									{l}
+								</a>
+							))}
+						</div>
+					</div>
+				</div>
+
+				<!-- Extra spacing at bottom for scroll -->
+				<div class="mt-24 shrink-0"></div>
 			</div>
 		</header>
 
@@ -87,47 +116,44 @@ const translatePath = useTranslatedPath(lang);
 				<div class="text-[10px] uppercase tracking-widest font-bold opacity-30">
 					© 2026 Art Gallery
 				</div>
-				<div class="text-[10px] uppercase tracking-widest font-bold opacity-30">
-					All rights reserved
+				<div class="text-[10px] uppercase tracking-widest font-bold opacity-30 uppercase tracking-widest">
+					Crafted with Passion
 				</div>
 			</div>
 		</footer>
 
 		<script>
 			const toggle = document.getElementById('menu-toggle');
+			const close = document.getElementById('menu-close');
 			const menu = document.getElementById('mobile-menu');
-			const spans = toggle?.querySelectorAll('span');
 			const links = document.querySelectorAll('.mobile-link');
 
 			let isOpen = false;
 
-			function toggleMenu() {
-				isOpen = !isOpen;
-				
-				if (isOpen) {
-					menu?.classList.remove('translate-x-full');
-					document.body.style.overflow = 'hidden';
-					if (spans) {
-						spans[0].style.transform = 'rotate(45deg) scaleX(1.1)';
-						spans[1].style.opacity = '0';
-						spans[2].style.transform = 'rotate(-45deg) scaleX(1.1)';
-					}
-				} else {
-					menu?.classList.add('translate-x-full');
-					document.body.style.overflow = '';
-					if (spans) {
-						spans[0].style.transform = '';
-						spans[1].style.opacity = '1';
-						spans[2].style.transform = '';
-					}
-				}
+			function openMenu() {
+				menu?.classList.remove('translate-x-full');
+				document.body.style.overflow = 'hidden';
+				isOpen = true;
 			}
 
-			toggle?.addEventListener('click', toggleMenu);
-			links.forEach(link => link.addEventListener('click', () => {
-				isOpen = true; // Set to true so toggleMenu closes it
-				toggleMenu();
-			}));
+			function closeMenu() {
+				menu?.classList.add('translate-x-full');
+				document.body.style.overflow = '';
+				isOpen = false;
+			}
+
+			toggle?.addEventListener('click', openMenu);
+			close?.addEventListener('click', closeMenu);
+			
+			// Close on link click
+			links.forEach(link => link.addEventListener('click', closeMenu));
+
+			// Accessibility: Close on Escape or Enter (when open)
+			window.addEventListener('keydown', (e) => {
+				if (isOpen && (e.key === 'Escape' || e.key === 'Enter')) {
+					closeMenu();
+				}
+			});
 		</script>
 	</body>
 </html>
