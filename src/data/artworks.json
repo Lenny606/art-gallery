@@ -10,11 +10,11 @@
     "dimensions": "120 x 100 cm",
     "year": 2024,
     "status": "available",
-    "mainImage": "/artworks/abs-001-1.jpg",
+    "mainImage": "/artworks/placeholder-1.jpg",
     "images": [
-      "/artworks/abs-001-1.jpg",
-      "/artworks/abs-001-2.jpg",
-      "/artworks/abs-001-3.jpg"
+      "/artworks/placeholder-1.jpg",
+      "/artworks/placeholder-2.jpg",
+      "/artworks/placeholder-3.jpg"
     ]
   },
   {
@@ -28,11 +28,11 @@
     "dimensions": "80 x 80 cm",
     "year": 2023,
     "status": "sold",
-    "mainImage": "/artworks/abs-002-1.jpg",
+    "mainImage": "/artworks/placeholder-2.jpg",
     "images": [
-      "/artworks/abs-002-1.jpg",
-      "/artworks/abs-002-2.jpg",
-      "/artworks/abs-002-3.jpg"
+      "/artworks/placeholder-2.jpg",
+      "/artworks/placeholder-3.jpg",
+      "/artworks/placeholder-1.jpg"
     ]
   },
   {
@@ -46,11 +46,11 @@
     "dimensions": "150 x 120 cm",
     "year": 2024,
     "status": "available",
-    "mainImage": "/artworks/abs-003-1.jpg",
+    "mainImage": "/artworks/placeholder-3.jpg",
     "images": [
-      "/artworks/abs-003-1.jpg",
-      "/artworks/abs-003-2.jpg",
-      "/artworks/abs-003-3.jpg"
+      "/artworks/placeholder-3.jpg",
+      "/artworks/placeholder-1.jpg",
+      "/artworks/placeholder-2.jpg"
     ]
   },
   {
@@ -64,11 +64,11 @@
     "dimensions": "100 x 50 cm",
     "year": 2024,
     "status": "available",
-    "mainImage": "/artworks/min-001-1.jpg",
+    "mainImage": "/artworks/placeholder-2.jpg",
     "images": [
-      "/artworks/min-001-1.jpg",
-      "/artworks/min-001-2.jpg",
-      "/artworks/min-001-3.jpg"
+      "/artworks/placeholder-2.jpg",
+      "/artworks/placeholder-1.jpg",
+      "/artworks/placeholder-3.jpg"
     ]
   },
   {
@@ -82,11 +82,11 @@
     "dimensions": "120 x 120 cm",
     "year": 2023,
     "status": "available",
-    "mainImage": "/artworks/min-002-1.jpg",
+    "mainImage": "/artworks/placeholder-1.jpg",
     "images": [
-      "/artworks/min-002-1.jpg",
-      "/artworks/min-002-2.jpg",
-      "/artworks/min-002-3.jpg"
+      "/artworks/placeholder-1.jpg",
+      "/artworks/placeholder-3.jpg",
+      "/artworks/placeholder-2.jpg"
     ]
   },
   {
@@ -100,11 +100,11 @@
     "dimensions": "60 x 60 cm",
     "year": 2024,
     "status": "reserved",
-    "mainImage": "/artworks/min-003-1.jpg",
+    "mainImage": "/artworks/placeholder-3.jpg",
     "images": [
-      "/artworks/min-003-1.jpg",
-      "/artworks/min-003-2.jpg",
-      "/artworks/min-003-3.jpg"
+      "/artworks/placeholder-3.jpg",
+      "/artworks/placeholder-2.jpg",
+      "/artworks/placeholder-1.jpg"
     ]
   },
   {
@@ -118,11 +118,11 @@
     "dimensions": "70 x 90 cm",
     "year": 2024,
     "status": "available",
-    "mainImage": "/artworks/por-001-1.jpg",
+    "mainImage": "/artworks/placeholder-3.jpg",
     "images": [
-      "/artworks/por-001-1.jpg",
-      "/artworks/por-001-2.jpg",
-      "/artworks/por-001-3.jpg"
+      "/artworks/placeholder-3.jpg",
+      "/artworks/placeholder-1.jpg",
+      "/artworks/placeholder-2.jpg"
     ]
   },
   {
@@ -136,11 +136,11 @@
     "dimensions": "80 x 100 cm",
     "year": 2023,
     "status": "sold",
-    "mainImage": "/artworks/por-002-1.jpg",
+    "mainImage": "/artworks/placeholder-1.jpg",
     "images": [
-      "/artworks/por-002-1.jpg",
-      "/artworks/por-002-2.jpg",
-      "/artworks/por-002-3.jpg"
+      "/artworks/placeholder-1.jpg",
+      "/artworks/placeholder-3.jpg",
+      "/artworks/placeholder-2.jpg"
     ]
   },
   {
@@ -154,11 +154,11 @@
     "dimensions": "60 x 80 cm",
     "year": 2024,
     "status": "available",
-    "mainImage": "/artworks/por-003-1.jpg",
+    "mainImage": "/artworks/placeholder-2.jpg",
     "images": [
-      "/artworks/por-003-1.jpg",
-      "/artworks/por-003-2.jpg",
-      "/artworks/por-003-3.jpg"
+      "/artworks/placeholder-2.jpg",
+      "/artworks/placeholder-1.jpg",
+      "/artworks/placeholder-3.jpg"
     ]
   },
   {
@@ -172,11 +172,11 @@
     "dimensions": "4K Digital",
     "year": 2024,
     "status": "available",
-    "mainImage": "/artworks/dig-001-1.jpg",
+    "mainImage": "/artworks/placeholder-3.jpg",
     "images": [
-      "/artworks/dig-001-1.jpg",
-      "/artworks/dig-001-2.jpg",
-      "/artworks/dig-001-3.jpg"
+      "/artworks/placeholder-3.jpg",
+      "/artworks/placeholder-2.jpg",
+      "/artworks/placeholder-1.jpg"
     ]
   },
   {
@@ -190,11 +190,11 @@
     "dimensions": "4K Digital",
     "year": 2024,
     "status": "available",
-    "mainImage": "/artworks/dig-002-1.jpg",
+    "mainImage": "/artworks/placeholder-1.jpg",
     "images": [
-      "/artworks/dig-002-1.jpg",
-      "/artworks/dig-002-2.jpg",
-      "/artworks/dig-002-3.jpg"
+      "/artworks/placeholder-1.jpg",
+      "/artworks/placeholder-3.jpg",
+      "/artworks/placeholder-2.jpg"
     ]
   },
   {
@@ -208,11 +208,11 @@
     "dimensions": "4K Digital",
     "year": 2023,
     "status": "reserved",
-    "mainImage": "/artworks/dig-003-1.jpg",
+    "mainImage": "/artworks/placeholder-2.jpg",
     "images": [
-      "/artworks/dig-003-1.jpg",
-      "/artworks/dig-003-2.jpg",
-      "/artworks/dig-003-3.jpg"
+      "/artworks/placeholder-2.jpg",
+      "/artworks/placeholder-1.jpg",
+      "/artworks/placeholder-3.jpg"
     ]
   }
 ]

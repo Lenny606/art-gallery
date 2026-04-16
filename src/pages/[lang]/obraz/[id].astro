@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ArtworkHero from '../../../components/ArtworkHero.astro';
+import ArtworkInfo from '../../../components/ArtworkInfo.astro';
+import ArtworkGallery from '../../../components/ArtworkGallery.astro';
+import artworks from '../../../data/artworks.json';
+import { useTranslations } from '../../../i18n/utils';
+
+import { ui } from '../../../i18n/ui';
+
+export function getStaticPaths() {
+  const locales = ['en', 'de'] as const;
+  return locales.flatMap((lang) => {
+    return artworks.map((art) => ({
+      params: { lang, id: art.id }
+    }));
+  });
+}
+
+const { lang, id } = Astro.params as { lang: keyof typeof ui, id: string };
+const art = artworks.find(a => a.id === id);
+
+if (!art) {
+    return Astro.redirect('/404');
+}
+const t = useTranslations(lang);
+
+// Localized values
+const title = art.title[lang as keyof typeof art.title] || art.title.en;
+const genreLabel = t(`categories.${art.genre}` as any);
+
+const labelsMap = {
+    en: { dimensions: 'Dimensions', year: 'Year', status: 'Status', back: 'Back to Gallery', about: 'About the work' },
+    de: { dimensions: 'Maße', year: 'Jahr', status: 'Status', back: 'Zurück zur Galerie', about: 'Über das Werk' }
+};
+
+const labels = labelsMap[lang as keyof typeof labelsMap] || labelsMap.en;
+
+const descriptions = {
+    en: `This piece represents a unique dialogue between form and content. ${title} is part of a deeper exploration of the ${genreLabel} medium. Every detail has been carefully considered to achieve maximum visual harmony.`,
+    de: `Dieses Stück stellt einen einzigartigen Dialog zwischen Form und Inhalt dar. ${title} ist Teil einer tieferen Auseinandersetzung mit dem Medium ${genreLabel}. Jedes Detail wurde sorgfältig durchdacht, um eine maximale visuelle Harmonie zu erreichen.`
+};
+
+const description = descriptions[lang as keyof typeof descriptions] || descriptions.en;
+---
+
+<BaseLayout title={`${title} | Art Gallery`} lang={lang}>
+    <main class="bg-white">
+        <!-- Temporary Debug Header -->
+        <div class="bg-black text-white p-2 text-[10px] uppercase tracking-widest text-center">
+            Detail ({lang.toUpperCase()}): {title} (ID: {id})
+        </div>
+
+        <ArtworkHero 
+            title={title} 
+            genre={genreLabel} 
+            image={art.mainImage} 
+        />
+
+        <div class="max-w-7xl mx-auto px-6 md:px-8">
+            <ArtworkInfo 
+                dimensions={art.dimensions} 
+                year={art.year} 
+                status={art.status}
+                labels={labels}
+            />
+            
+            <div class="description py-16 md:py-24 max-w-3xl">
+                <h2 class="text-3xl font-black mb-8 uppercase tracking-tighter">{labels.about}</h2>
+                <p class="text-xl text-stone-600 leading-relaxed italic">
+                    {description}
+                </p>
+            </div>
+        </div>
+
+        <ArtworkGallery images={art.images} />
+        
+        <!-- Navigation Back -->
+        <div class="max-w-7xl mx-auto px-6 md:px-8 pb-24">
+            <a href={`/${lang}/galerie`} class="inline-flex items-center gap-4 group">
+                <div class="w-12 h-12 rounded-full border border-stone-200 flex items-center justify-center group-hover:bg-black group-hover:text-white transition-all duration-500">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.8333 10H4.16667" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M10 15.8333L4.16667 10L10 4.16667" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <span class="text-xs font-black uppercase tracking-widest">{labels.back}</span>
+            </a>
+        </div>
+    </main>
+</BaseLayout>

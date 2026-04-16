@@ -1,0 +1,26 @@
+---
+interface Props {
+  images: string[];
+}
+
+const { images } = Astro.props;
+---
+
+<section class="artwork-gallery py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+            <!-- Large Main Preview -->
+            <div class="md:col-span-2 aspect-[21/9] rounded-3xl overflow-hidden bg-stone-100 group shadow-sm">
+                 <img src={images[0]} alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" loading="lazy" />
+            </div>
+            
+            <!-- Secondary Previews -->
+            <div class="aspect-square rounded-3xl overflow-hidden bg-stone-100 group shadow-sm">
+                 <img src={images[1]} alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" loading="lazy" />
+            </div>
+            <div class="aspect-square rounded-3xl overflow-hidden bg-stone-100 group shadow-sm">
+                 <img src={images[2]} alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" loading="lazy" />
+            </div>
+        </div>
+    </div>
+</section>

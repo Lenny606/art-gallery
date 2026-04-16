@@ -1,0 +1,42 @@
+---
+interface Props {
+  dimensions: string;
+  year: number;
+  status: string;
+  labels: {
+    dimensions: string;
+    year: string;
+    status: string;
+  }
+}
+
+const { dimensions, year, status, labels } = Astro.props;
+
+const statusColors = {
+    available: 'bg-emerald-500',
+    sold: 'bg-stone-300',
+    reserved: 'bg-amber-500'
+};
+
+const statusKey = status as keyof typeof statusColors;
+---
+
+<div class="artwork-info py-12 border-y border-stone-100 mt-12">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="info-item">
+            <span class="block text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-2">{labels.dimensions}</span>
+            <p class="text-xl font-medium">{dimensions}</p>
+        </div>
+        <div class="info-item">
+            <span class="block text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-2">{labels.year}</span>
+            <p class="text-xl font-medium">{year}</p>
+        </div>
+        <div class="info-item">
+            <span class="block text-[10px] uppercase tracking-widest text-stone-400 font-bold mb-2">{labels.status}</span>
+            <div class="flex items-center gap-2 mt-1">
+                <span class={`w-2 h-2 rounded-full ${statusColors[statusKey] || 'bg-stone-200'}`}></span>
+                <p class="text-xl font-medium uppercase tracking-tight text-sm">{status}</p>
+            </div>
+        </div>
+    </div>
+</div>

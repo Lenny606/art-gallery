@@ -6,11 +6,10 @@ const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 
 const categories = [
-    { id: 'abstract', key: 'categories.abstract' },
-    { id: 'minimal', key: 'categories.minimal' },
-    { id: 'portraits', key: 'categories.portraits' },
-    { id: 'digital', key: 'categories.digital' },
-    { id: 'classic', key: 'categories.abstract' }, // Reusing for skeleton variety
+    { id: 'abstract', key: 'categories.abstract', image: '/artworks/placeholder-1.jpg' },
+    { id: 'minimal', key: 'categories.minimal', image: '/artworks/placeholder-2.jpg' },
+    { id: 'portraits', key: 'categories.portraits', image: '/artworks/placeholder-3.jpg' },
+    { id: 'digital', key: 'categories.digital', image: '/artworks/placeholder-1.jpg' },
 ];
 ---
 
@@ -32,9 +31,10 @@ const categories = [
 
     <div class="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory" id="slider-container">
         {categories.map((cat) => (
-            <a href={translatePath(`/kategorie/${cat.id}`)} class="min-w-[80vw] md:min-w-[400px] aspect-[4/5] bg-stone-200 snap-start group cursor-pointer relative overflow-hidden block">
-                <div class="absolute inset-0 bg-stone-300 transform scale-100 group-hover:scale-105 transition-transform duration-700"></div>
-                <div class="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-black/20 to-transparent">
+            <a href={translatePath(`/kategorie/${cat.id}`)} class="min-w-[80vw] md:min-w-[400px] aspect-[4/5] bg-stone-100 snap-start group cursor-pointer relative overflow-hidden block rounded-2xl">
+                <img src={cat.image} alt="" class="absolute inset-0 w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700 opacity-80" />
+                <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+                <div class="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-black/60 to-transparent">
                     <p class="text-xs uppercase tracking-widest font-bold text-white mb-2">{t(cat.key as any)}</p>
                     <h3 class="text-2xl font-black text-white italic">0{categories.indexOf(cat) + 1}</h3>
                 </div>

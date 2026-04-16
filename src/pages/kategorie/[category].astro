@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
+import artworks from '../../data/artworks.json';
 
 export function getStaticPaths() {
   return [
@@ -16,7 +17,11 @@ const { key } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 const title = t(key as any);
+
+// Filter artworks by genre
+const categoryArtworks = artworks.filter(art => art.genre === category);
 ---
 
 <BaseLayout title={`${title} | Art Gallery`} lang={lang}>
@@ -27,16 +32,31 @@ const title = t(key as any);
             <div class="h-[1px] w-full bg-black/10 mb-12"></div>
         </div>
 
-        <!-- Skeleton Grid for the category -->
+        <!-- Real Artworks Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div class="group">
-                    <div class="aspect-[3/4] bg-stone-200 mb-4 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-stone-300 transform scale-100 group-hover:scale-105 transition-transform duration-700"></div>
+            {categoryArtworks.map((art) => (
+                <a href={translatePath(`/obraz/${art.id}`)} class="group block">
+                    <div class="aspect-[3/4] bg-stone-100 mb-6 relative overflow-hidden rounded-lg">
+                        <img 
+                            src={art.mainImage} 
+                            alt={art.title[lang as keyof typeof art.title] || art.title.en} 
+                            class="absolute inset-0 w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700" 
+                        />
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500"></div>
                     </div>
-                    <h3 class="font-bold uppercase text-sm tracking-tight">{title} Study #{i}</h3>
-                </div>
+                    <h3 class="font-bold uppercase text-sm tracking-tight">{art.title[lang as keyof typeof art.title] || art.title.en}</h3>
+                    <div class="flex justify-between items-center opacity-40 mt-1">
+                        <p class="text-[10px] uppercase font-bold tracking-widest">{art.year}</p>
+                        <p class="text-[10px] uppercase font-bold tracking-widest">{art.status}</p>
+                    </div>
+                </a>
             ))}
         </div>
+        
+        {categoryArtworks.length === 0 && (
+            <div class="py-24 text-center">
+                <p class="text-stone-400 italic">V této kategorii zatím nejsou žádná díla.</p>
+            </div>
+        )}
     </div>
 </BaseLayout>
