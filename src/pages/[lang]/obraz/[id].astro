@@ -46,11 +46,6 @@ const description = descriptions[lang as keyof typeof descriptions] || descripti
 
 <BaseLayout title={`${title} | Art Gallery`} lang={lang}>
     <main class="bg-white">
-        <!-- Temporary Debug Header -->
-        <div class="bg-black text-white p-2 text-[10px] uppercase tracking-widest text-center">
-            Detail ({lang.toUpperCase()}): {title} (ID: {id})
-        </div>
-
         <ArtworkHero 
             title={title} 
             genre={genreLabel} 
