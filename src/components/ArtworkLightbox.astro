@@ -1,0 +1,173 @@
+---
+interface Props {
+  images: string[];
+}
+
+const { images } = Astro.props;
+---
+
+<div id="artwork-lightbox" class="fixed inset-0 z-[200] bg-black/95 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-500 hidden lg:flex flex-col items-center justify-center">
+    <!-- Close Button -->
+    <button id="lightbox-close" class="absolute top-8 right-8 text-white/50 hover:text-white transition-colors p-4 focus:outline-none z-[210]">
+        <span class="sr-only">Zavřít</span>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <!-- Navigation -->
+    <button id="lightbox-prev" class="absolute left-4 md:left-12 top-1/2 -translate-y-1/2 text-white/30 hover:text-white hover:scale-125 transition-all p-8 z-[220] cursor-pointer group">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="drop-shadow-lg">
+            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <button id="lightbox-next" class="absolute right-4 md:right-12 top-1/2 -translate-y-1/2 text-white/30 hover:text-white hover:scale-125 transition-all p-8 z-[220] cursor-pointer group">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="drop-shadow-lg">
+            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <!-- Counter -->
+    <div class="absolute bottom-12 left-1/2 -translate-x-1/2 text-white/50 text-[10px] uppercase tracking-[0.5em] font-black">
+        <span id="lightbox-current">1</span> / <span id="lightbox-total">{images.length}</span>
+    </div>
+
+    <!-- Image Container -->
+    <div class="relative w-full h-full max-w-6xl max-h-[80vh] flex items-center justify-center p-8 select-none">
+        {images.map((img, index) => (
+            <img 
+                src={img} 
+                alt="" 
+                class={`lightbox-img absolute max-w-full max-h-full object-contain transition-all duration-700 ease-in-out opacity-0 translate-x-12 scale-95 pointer-events-none ${index === 0 ? 'active' : ''}`}
+                data-index={index}
+            />
+        ))}
+    </div>
+</div>
+
+<style>
+    .lightbox-img.active {
+        opacity: 1;
+        translate: 0 0;
+        scale: 1;
+        pointer-events: auto;
+    }
+
+    /* Animation for entering from side */
+    .lightbox-img.next-exit {
+        opacity: 0;
+        translate: -50px 0;
+        scale: 0.95;
+    }
+    .lightbox-img.prev-exit {
+        opacity: 0;
+        translate: 50px 0;
+        scale: 0.95;
+    }
+</style>
+
+<script>
+    let currentIndex = 0;
+    const lightbox = document.getElementById('artwork-lightbox');
+    const closeBtn = document.getElementById('lightbox-close');
+    const nextBtn = document.getElementById('lightbox-next');
+    const prevBtn = document.getElementById('lightbox-prev');
+    const imgs = document.querySelectorAll('.lightbox-img');
+    const currentText = document.getElementById('lightbox-current');
+    
+    const total = imgs.length;
+
+    function showImage(index: number, direction: 'next' | 'prev' = 'next') {
+        const currentImg = document.querySelector('.lightbox-img.active');
+        if (currentImg) {
+            currentImg.classList.remove('active');
+            currentImg.classList.add(direction === 'next' ? 'next-exit' : 'prev-exit');
+            setTimeout(() => {
+                currentImg.classList.remove('next-exit', 'prev-exit');
+            }, 700);
+        }
+
+        const nextImg = imgs[index];
+        nextImg.classList.add('active');
+        
+        currentIndex = index;
+        if (currentText) currentText.textContent = (currentIndex + 1).toString();
+    }
+
+    function openLightbox(index: number) {
+        if (!lightbox) return;
+        lightbox.classList.remove('hidden');
+        setTimeout(() => {
+            lightbox.classList.add('opacity-100', 'pointer-events-auto');
+            showImage(index);
+        }, 10);
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        if (!lightbox) return;
+        lightbox.classList.remove('opacity-100', 'pointer-events-auto');
+        document.body.style.overflow = '';
+        setTimeout(() => {
+            lightbox.classList.add('hidden');
+        }, 500);
+    }
+
+    function next() {
+        showImage((currentIndex + 1) % total, 'next');
+    }
+
+    function prev() {
+        showImage((currentIndex - 1 + total) % total, 'prev');
+    }
+
+    // Interaction logic
+    function setupEventListeners() {
+        if (!lightbox) return;
+
+        // Prevent closing when clicking the image or buttons
+        const content = lightbox.querySelector('.relative');
+        content?.addEventListener('click', (e) => e.stopPropagation());
+
+        nextBtn?.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            next();
+        });
+
+        prevBtn?.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            prev();
+        });
+
+        closeBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeLightbox();
+        });
+
+        // Close only when clicking the backdrop
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // Event Listeners for trigger (will stay in Gallery)
+        document.addEventListener('open-lightbox', (e: any) => {
+            openLightbox(e.detail.index);
+        });
+
+        // Keyboard support
+        window.addEventListener('keydown', (e) => {
+            if (lightbox.classList.contains('hidden')) return;
+            
+            if (e.key === 'ArrowRight') next();
+            if (e.key === 'ArrowLeft') prev();
+            if (e.key === 'Escape') closeLightbox();
+        });
+    }
+
+    setupEventListeners();
+</script>
