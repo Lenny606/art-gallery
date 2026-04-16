@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CategorySlider from '../components/CategorySlider.astro';
+import ArtworkGrid from '../components/ArtworkGrid.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
@@ -17,4 +18,5 @@ const t = useTranslations(lang);
 	</div>
 
 	<CategorySlider />
+	<ArtworkGrid />
 </BaseLayout>
