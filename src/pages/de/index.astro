@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<BaseLayout title={`Art Gallery | ${t('nav.gallery')}`} lang={lang}>
+	<main class="relative overflow-hidden">
+		<!-- Background Decorative Element -->
+		<div class="absolute top-0 left-0 w-full h-screen pointer-events-none overflow-hidden -z-10">
+			<div id="glow" class="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-gold-500/10 rounded-full blur-[120px]"></div>
+		</div>
+
+		<section class="max-w-7xl mx-auto px-6 pt-32 pb-24 min-h-screen flex flex-col justify-center">
+			<div class="space-y-6">
+				<div class="overflow-hidden">
+					<p id="sub-title" class="text-gold-500 font-medium tracking-[0.2em] uppercase text-sm opacity-0 translate-y-full">
+						{t('hero.subTitle')}
+					</p>
+				</div>
+				
+				<h1 id="main-title" class="text-7xl md:text-9xl font-black leading-none tracking-tight">
+					<span class="block">{t('hero.mainTitleTop')}</span>
+					<span class="block text-transparent bg-clip-text bg-gradient-to-r from-white via-stone-400 to-stone-600">{t('hero.mainTitleBottom')}</span>
+				</h1>
+
+				<div class="max-w-xl mt-8">
+					<p id="description" class="text-stone-400 text-lg leading-relaxed opacity-0">
+						{t('hero.description')}
+					</p>
+				</div>
+
+				<div id="cta" class="mt-12 opacity-0">
+					<a href="#prozkoumat" class="inline-flex items-center gap-4 px-8 py-4 bg-white text-black font-bold rounded-full hover:bg-gold-500 hover:text-white transition-all duration-500 group">
+						{t('hero.cta')}
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-2 transition-transform duration-300"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<section id="prozkoumat" class="py-24 px-6 bg-[#0f0f0f]">
+			<div class="max-w-7xl mx-auto">
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+					<!-- Sample Cards -->
+					{[1, 2, 3].map((i) => (
+						<div class="card aspect-[3/4] bg-stone-900 border border-white/5 rounded-2xl overflow-hidden hover:border-gold-500/30 transition-colors duration-500 group cursor-pointer opacity-0 translate-y-10">
+							<div class="h-full w-full bg-gradient-to-br from-stone-800 to-stone-900 flex items-center justify-center text-stone-700 font-bold text-4xl group-hover:scale-105 transition-transform duration-700">
+								{t('card.art')} {i}
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+	</main>
+</BaseLayout>
+
+<script>
+	import { gsap } from 'gsap';
+
+	window.addEventListener('DOMContentLoaded', () => {
+		const tl = gsap.timeline({ defaults: { ease: 'power4.out', duration: 1.5 } });
+
+		tl.to('#sub-title', { opacity: 1, y: 0, delay: 0.5 })
+		  .from('#main-title span', { y: 150, skewY: 7, stagger: 0.1 }, "-=1.2")
+		  .to('#description', { opacity: 1, y: 0 }, "-=1")
+		  .to('#cta', { opacity: 1, y: 0 }, "-=1.2")
+		  .to('#glow', { 
+			x: 'random(-50, 50)', 
+			y: 'random(-50, 50)', 
+			repeat: -1, 
+			yoyo: true, 
+			duration: 5, 
+			ease: 'sine.inOut' 
+		  }, 0);
+
+		gsap.to('.card', {
+			opacity: 1,
+			y: 0,
+			stagger: 0.2,
+			duration: 1,
+		});
+	});
+</script>
+
+<style>
+	:root {
+		--gold-500: #d4af37;
+	}
+	.bg-gold-500\/10 { background-color: rgba(212, 175, 55, 0.1); }
+	.text-gold-500 { color: #d4af37; }
+	.selection\:bg-gold-500\/30 *::selection { background-color: rgba(212, 175, 55, 0.3); }
+	.hover\:bg-gold-500:hover { background-color: #d4af37; }
+	.hover\:border-gold-500\/30:hover { border-color: rgba(212, 175, 55, 0.3); }
+</style>

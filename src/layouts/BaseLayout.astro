@@ -24,6 +24,21 @@ const { title, description = "Art Gallery - A premium exhibition of digital arts
 		<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 	</head>
 	<body class="min-h-screen font-inter antialiased">
+		<header class="fixed top-0 w-full z-50 px-6 py-6 flex justify-between items-center pointer-events-none">
+			<div class="pointer-events-auto">
+				<a href="/" class="text-xl font-black tracking-tighter">AG.</a>
+			</div>
+			<nav class="flex gap-4 pointer-events-auto bg-black/20 backdrop-blur-md px-4 py-2 rounded-full border border-white/5">
+				{['cs', 'en', 'de'].map((l) => (
+					<a 
+						href={l === 'cs' ? '/' : `/${l}/`} 
+						class={`text-xs uppercase tracking-widest hover:text-gold-500 transition-colors ${lang === l ? 'text-gold-500' : 'text-stone-500'}`}
+					>
+						{l}
+					</a>
+				))}
+			</nav>
+		</header>
 		<slot />
 	</body>
 </html>
