@@ -1,13 +1,18 @@
 ---
 import '../styles/global.css';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
+import { ui } from '../i18n/ui';
 
 interface Props {
 	title: string;
 	description?: string;
-	lang?: string;
+	lang?: keyof typeof ui;
 }
 
-const { title, description = "Art Gallery - A premium exhibition of digital arts", lang = "cs" } = Astro.props;
+const { title, description = "Art Gallery - A premium exhibition of digital arts" } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 ---
 
 <!DOCTYPE html>
@@ -23,36 +28,107 @@ const { title, description = "Art Gallery - A premium exhibition of digital arts
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 	</head>
-	<body class="min-h-screen font-inter antialiased">
-		<header class="w-full flex justify-between items-center px-8 py-12">
-			<nav class="flex gap-8 items-center w-full max-w-7xl mx-auto">
-				<a href="/" class="text-xs uppercase tracking-widest font-bold">Úvod</a>
-				<a href="/galerie" class="text-xs uppercase tracking-widest font-bold opacity-50 hover:opacity-100 transition-opacity">Galerie</a>
-				<a href="/umelci" class="text-xs uppercase tracking-widest font-bold opacity-50 hover:opacity-100 transition-opacity">Umělci</a>
-				<a href="/kontakt" class="text-xs uppercase tracking-widest font-bold opacity-50 hover:opacity-100 transition-opacity">Kontakt</a>
+	<body class="min-h-screen font-inter antialiased overflow-x-hidden">
+		<header class="w-full px-6 py-8 md:px-8 md:py-12 relative z-[100]">
+			<nav class="flex justify-between items-center w-full max-w-7xl mx-auto">
+				<!-- Desktop Nav (Hidden on mobile) -->
+				<div class="hidden md:flex gap-8 items-center">
+					<a href={translatePath('/')} class="text-xs uppercase tracking-widest font-bold">{t('nav.home')}</a>
+					<a href={translatePath('/galerie')} class="text-xs uppercase tracking-widest font-bold opacity-50 hover:opacity-100 transition-opacity">{t('nav.gallery')}</a>
+					<a href={translatePath('/kontakt')} class="text-xs uppercase tracking-widest font-bold opacity-50 hover:opacity-100 transition-opacity">{t('nav.contact')}</a>
+				</div>
+
+				<!-- Logo / Brand for Mobile (Optional, let's keep it centered or left) -->
+				<div class="md:hidden">
+					<a href={translatePath('/')} class="text-sm uppercase tracking-widest font-black">Art Gallery.</a>
+				</div>
 				
-				<div class="ml-auto flex gap-4">
-					{['cs', 'en', 'de'].map((l) => (
-						<a 
-							href={l === 'cs' ? '/' : `/${l}/`} 
-							class={`text-[10px] uppercase tracking-tighter ${lang === l ? 'font-bold underline underline-offset-4' : 'opacity-30'}`}
-						>
-							{l}
-						</a>
-					))}
+				<!-- Language Switcher & Hamburger -->
+				<div class="flex gap-6 items-center ml-auto">
+					<!-- Language Switcher (Desktop and Mobile) -->
+					<div class="flex gap-3">
+						{['cs', 'en', 'de'].map((l) => (
+							<a 
+								href={l === 'cs' ? '/' : `/${l}/`} 
+								class={`text-[10px] uppercase tracking-tighter ${lang === l ? 'font-bold underline underline-offset-4' : 'opacity-30'}`}
+							>
+								{l}
+							</a>
+						))}
+					</div>
+
+					<!-- Hamburger Button -->
+					<button id="menu-toggle" class="md:hidden p-2 -mr-2 focus:outline-none" aria-label="Toggle Menu">
+						<div class="w-6 h-4 relative flex flex-col justify-between">
+							<span class="w-full h-[1.5px] bg-[#1a1a1a] transition-all duration-300 origin-left"></span>
+							<span class="w-full h-[1.5px] bg-[#1a1a1a] transition-all duration-300"></span>
+							<span class="w-full h-[1.5px] bg-[#1a1a1a] transition-all duration-300 origin-left"></span>
+						</div>
+					</button>
 				</div>
 			</nav>
+
+			<!-- Mobile Menu Overlay -->
+			<div id="mobile-menu" class="fixed inset-0 bg-[#fafafa] z-[90] flex flex-col items-center justify-center translate-x-full transition-transform duration-500 md:hidden">
+				<nav class="flex flex-col gap-12 text-center">
+					<a href={translatePath('/')} class="mobile-link text-4xl font-black">{t('nav.home')}</a>
+					<a href={translatePath('/galerie')} class="mobile-link text-4xl font-black">{t('nav.gallery')}</a>
+					<a href={translatePath('/kontakt')} class="mobile-link text-4xl font-black">{t('nav.contact')}</a>
+				</nav>
+			</div>
 		</header>
-		<main>
+
+		<main class="relative z-10">
 			<slot />
 		</main>
-		<footer class="py-24 px-8 border-t border-black/5 mt-24">
-			<div class="max-w-7xl mx-auto flex justify-between items-start">
+
+		<footer class="py-12 md:py-24 px-6 md:px-8 border-t border-black/5 mt-12 md:mt-24">
+			<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 md:gap-0">
 				<div class="text-[10px] uppercase tracking-widest font-bold opacity-30">
 					© 2026 Art Gallery
 				</div>
+				<div class="text-[10px] uppercase tracking-widest font-bold opacity-30">
+					All rights reserved
+				</div>
 			</div>
 		</footer>
+
+		<script>
+			const toggle = document.getElementById('menu-toggle');
+			const menu = document.getElementById('mobile-menu');
+			const spans = toggle?.querySelectorAll('span');
+			const links = document.querySelectorAll('.mobile-link');
+
+			let isOpen = false;
+
+			function toggleMenu() {
+				isOpen = !isOpen;
+				
+				if (isOpen) {
+					menu?.classList.remove('translate-x-full');
+					document.body.style.overflow = 'hidden';
+					if (spans) {
+						spans[0].style.transform = 'rotate(45deg) scaleX(1.1)';
+						spans[1].style.opacity = '0';
+						spans[2].style.transform = 'rotate(-45deg) scaleX(1.1)';
+					}
+				} else {
+					menu?.classList.add('translate-x-full');
+					document.body.style.overflow = '';
+					if (spans) {
+						spans[0].style.transform = '';
+						spans[1].style.opacity = '1';
+						spans[2].style.transform = '';
+					}
+				}
+			}
+
+			toggle?.addEventListener('click', toggleMenu);
+			links.forEach(link => link.addEventListener('click', () => {
+				isOpen = true; // Set to true so toggleMenu closes it
+				toggleMenu();
+			}));
+		</script>
 	</body>
 </html>
 

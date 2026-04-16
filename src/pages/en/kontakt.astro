@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<BaseLayout title={`Art Gallery | ${t('contact.title')}`} lang={lang}>
+	<div class="max-w-7xl mx-auto px-8 py-24">
+		<h1 class="text-9xl font-black mb-12">{t('contact.title')}.</h1>
+		<div class="h-[1px] w-full bg-black/10 mb-12"></div>
+		<p class="text-2xl text-stone-500 max-w-2xl leading-relaxed">
+			{t('contact.description')}
+		</p>
+	</div>
+</BaseLayout>
