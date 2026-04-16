@@ -1,0 +1,244 @@
+---
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+---
+
+<footer class="footer-container">
+    <div class="footer-content">
+        <!-- Brand & Vision -->
+        <div class="footer-section brand-section">
+            <a href={translatePath('/')} class="footer-logo">Art Gallery.</a>
+            <p class="footer-mission">
+                {t('hero.description').substring(0, 120)}...
+            </p>
+        </div>
+
+        <!-- Navigation -->
+        <div class="footer-section">
+            <h4 class="footer-title">Menu</h4>
+            <nav class="footer-nav">
+                <a href={translatePath('/')}>{t('nav.home')}</a>
+                <a href={translatePath('/galerie')}>{t('nav.gallery')}</a>
+                <a href={translatePath('/kontakt')}>{t('nav.contact')}</a>
+            </nav>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="footer-section">
+            <h4 class="footer-title">{t('contact.title')}</h4>
+            <ul class="contact-list">
+                <li>
+                    <span class="label">{t('footer.address')}:</span>
+                    <span class="value">Vodičkova 123, 110 00 Praha 1</span>
+                </li>
+                <li>
+                    <span class="label">{t('footer.phone')}:</span>
+                    <span class="value">+420 123 456 789</span>
+                </li>
+                <li>
+                    <span class="label">{t('footer.email')}:</span>
+                    <span class="value">hello@artgallery.com</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Socials -->
+        <div class="footer-section">
+            <h4 class="footer-title">{t('footer.followUs')}</h4>
+            <div class="social-links">
+                <a href="#" aria-label="Instagram" class="social-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+                </a>
+                <a href="#" aria-label="Twitter" class="social-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
+                </a>
+                <a href="#" aria-label="LinkedIn" class="social-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom">
+        <div class="bottom-content">
+            <span class="copyright">{t('footer.copyright')}</span>
+            <span class="separator"></span>
+            <span class="crafted">Crafted with Passion</span>
+        </div>
+    </div>
+</footer>
+
+<style>
+    .footer-container {
+        background-color: #fafafa;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        padding: 80px 32px 40px;
+        margin-top: 80px;
+    }
+
+    .footer-content {
+        max-width: 1280px;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1.5fr 1fr;
+        gap: 64px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 1024px) {
+        .footer-content {
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .footer-content {
+            grid-template-columns: 1fr;
+            gap: 40px;
+            padding: 0 16px;
+        }
+        .footer-container {
+            padding: 60px 16px 32px;
+        }
+    }
+
+    .footer-logo {
+        font-size: 1.25rem;
+        font-weight: 900;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 24px;
+        display: block;
+        text-decoration: none;
+        color: #1a1a1a;
+    }
+
+    .footer-mission {
+        font-size: 0.875rem;
+        line-height: 1.6;
+        color: rgba(26, 26, 26, 0.6);
+        max-width: 320px;
+    }
+
+    .footer-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 24px;
+        color: #1a1a1a;
+    }
+
+    .footer-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .footer-nav a {
+        font-size: 0.875rem;
+        color: rgba(26, 26, 26, 0.5);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        width: fit-content;
+    }
+
+    .footer-nav a:hover {
+        color: #1a1a1a;
+        transform: translateX(4px);
+    }
+
+    .contact-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .contact-list li {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .contact-list .label {
+        font-size: 0.625rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-weight: 800;
+        color: rgba(26, 26, 26, 0.3);
+    }
+
+    .contact-list .value {
+        font-size: 0.875rem;
+        color: rgba(26, 26, 26, 0.7);
+    }
+
+    .social-links {
+        display: flex;
+        gap: 16px;
+    }
+
+    .social-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: transparent;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        color: rgba(26, 26, 26, 0.4);
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .social-icon:hover {
+        background: #1a1a1a;
+        color: #fafafa;
+        transform: translateY(-4px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        border-color: #1a1a1a;
+    }
+
+    .footer-bottom {
+        margin-top: 80px;
+        padding-top: 32px;
+        border-top: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    .bottom-content {
+        max-width: 1280px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 0.625rem;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        font-weight: 700;
+        color: rgba(26, 26, 26, 0.3);
+    }
+
+    @media (max-width: 640px) {
+        .bottom-content {
+            flex-direction: column;
+            gap: 16px;
+            text-align: center;
+        }
+        .separator {
+            display: none;
+        }
+    }
+
+    .separator {
+        flex-grow: 1;
+        height: 1px;
+        background: rgba(0, 0, 0, 0.03);
+        margin: 0 32px;
+    }
+</style>
