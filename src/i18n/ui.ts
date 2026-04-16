@@ -10,6 +10,8 @@ export const ui = {
   cs: {
     'nav.home': 'Domů',
     'nav.gallery': 'Galerie',
+    'nav.artists': 'Umělci',
+    'nav.contact': 'Kontakt',
     'hero.subTitle': 'Nová dimenze zážitku',
     'hero.mainTitleTop': 'CREATIVE',
     'hero.mainTitleBottom': 'GALLERY',
@@ -20,6 +22,8 @@ export const ui = {
   en: {
     'nav.home': 'Home',
     'nav.gallery': 'Gallery',
+    'nav.artists': 'Artists',
+    'nav.contact': 'Contact',
     'hero.subTitle': 'A New Dimension of Experience',
     'hero.mainTitleTop': 'CREATIVE',
     'hero.mainTitleBottom': 'GALLERY',
@@ -30,6 +34,8 @@ export const ui = {
   de: {
     'nav.home': 'Startseite',
     'nav.gallery': 'Galerie',
+    'nav.artists': 'Künstler',
+    'nav.contact': 'Kontakt',
     'hero.subTitle': 'Eine neue Dimension der Erfahrung',
     'hero.mainTitleTop': 'KREATIVE',
     'hero.mainTitleBottom': 'GALERIE',

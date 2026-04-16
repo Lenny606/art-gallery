@@ -11,7 +11,7 @@ const { title, description = "Art Gallery - A premium exhibition of digital arts
 ---
 
 <!DOCTYPE html>
-<html lang={lang} class="bg-[#0a0a0a] text-white selection:bg-gold-500/30">
+<html lang={lang} class="bg-[#fafafa] text-[#1a1a1a] selection:bg-black/10">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
@@ -24,35 +24,43 @@ const { title, description = "Art Gallery - A premium exhibition of digital arts
 		<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 	</head>
 	<body class="min-h-screen font-inter antialiased">
-		<header class="fixed top-0 w-full z-50 px-6 py-6 flex justify-between items-center pointer-events-none">
-			<div class="pointer-events-auto">
-				<a href="/" class="text-xl font-black tracking-tighter">AG.</a>
-			</div>
-			<nav class="flex gap-4 pointer-events-auto bg-black/20 backdrop-blur-md px-4 py-2 rounded-full border border-white/5">
-				{['cs', 'en', 'de'].map((l) => (
-					<a 
-						href={l === 'cs' ? '/' : `/${l}/`} 
-						class={`text-xs uppercase tracking-widest hover:text-gold-500 transition-colors ${lang === l ? 'text-gold-500' : 'text-stone-500'}`}
-					>
-						{l}
-					</a>
-				))}
+		<header class="w-full flex justify-between items-center px-8 py-12">
+			<nav class="flex gap-8 items-center w-full max-w-7xl mx-auto">
+				<a href="/" class="text-xs uppercase tracking-widest font-bold">Úvod</a>
+				<a href="/galerie" class="text-xs uppercase tracking-widest font-bold opacity-50 hover:opacity-100 transition-opacity">Galerie</a>
+				<a href="/umelci" class="text-xs uppercase tracking-widest font-bold opacity-50 hover:opacity-100 transition-opacity">Umělci</a>
+				<a href="/kontakt" class="text-xs uppercase tracking-widest font-bold opacity-50 hover:opacity-100 transition-opacity">Kontakt</a>
+				
+				<div class="ml-auto flex gap-4">
+					{['cs', 'en', 'de'].map((l) => (
+						<a 
+							href={l === 'cs' ? '/' : `/${l}/`} 
+							class={`text-[10px] uppercase tracking-tighter ${lang === l ? 'font-bold underline underline-offset-4' : 'opacity-30'}`}
+						>
+							{l}
+						</a>
+					))}
+				</div>
 			</nav>
 		</header>
-		<slot />
+		<main>
+			<slot />
+		</main>
+		<footer class="py-24 px-8 border-t border-black/5 mt-24">
+			<div class="max-w-7xl mx-auto flex justify-between items-start">
+				<div class="text-[10px] uppercase tracking-widest font-bold opacity-30">
+					© 2026 Art Gallery
+				</div>
+			</div>
+		</footer>
 	</body>
 </html>
 
 <style is:global>
-	:root {
-		--gold-500: #d4af37;
-	}
-	
 	h1, h2, h3, h4, h5, h6 {
 		font-family: 'Playfair Display', serif;
 	}
 
-	/* Custom smooth scroll if needed */
 	html {
 		scroll-behavior: smooth;
 	}
