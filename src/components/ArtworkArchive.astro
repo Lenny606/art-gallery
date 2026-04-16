@@ -92,7 +92,7 @@ const processedArtworks = artworks.map(art => ({
     </div>
 
     <!-- Results Grid -->
-    <div id="archive-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 opacity-1 transition-opacity duration-500">
+    <div id="archive-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 opacity-100 transition-opacity duration-500">
         {processedArtworks.map((art) => (
             <a 
                 href={translatePath(`/obraz/${art.id}`)}
